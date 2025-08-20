@@ -17,7 +17,6 @@ type ExtractParams<T extends string> =
 export type TranslationParams<K extends TranslationKey> =
   K extends keyof ParamMap ? ParamMap[K] : Record<string, never>;
 
-// Key-param mapping
 type ParamMap = {
   'common.hello': { name: string };
   'items.many': { count: number };

@@ -37,14 +37,6 @@ body {
   color: #93c5fd;
 }
 
-.header select {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
 .select-gender {
   padding: 6px 10px;
   border-radius: 6px;
@@ -85,7 +77,7 @@ form button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: 0.3s;
 }
 
 .prof-title {

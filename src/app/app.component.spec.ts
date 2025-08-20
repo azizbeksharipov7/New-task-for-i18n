@@ -1,29 +1,54 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { I18nService } from '../i18n/i18n.service';
+import { TranslatePipe } from '../i18n/translate.pipe';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Select } from 'primeng/select';
 
 describe('AppComponent', () => {
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
+  let i18n: I18nService;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [AppComponent, CommonModule, FormsModule, TranslatePipe, Select],
+      providers: [I18nService]
     }).compileComponents();
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    i18n = TestBed.inject(I18nService);
+    fixture.detectChanges();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should create the component', () => {
+    expect(component).toBeTruthy();
   });
 
-  it(`should have the 'i18n' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('i18n');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it('should render profile title translation', async () => {
+    await (i18n as any).loadTranslations('en');
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, i18n');
+    expect(compiled.querySelector('.prof-title')?.textContent).toContain('User Profile');
+  });
+
+  it('should change language when changeLanguage is called', () => {
+    spyOn(i18n, 'switchLanguage');
+    component.changeLanguage('ru');
+    expect(i18n.switchLanguage).toHaveBeenCalledWith('ru');
+  });
+
+  it('should return correct gender key', () => {
+    component.selectedGender = 'female';
+    expect(component.genderKey).toBe('profile.gender.female');
+  });
+
+  it('should render hello with param', async () => {
+    await (i18n as any).loadTranslations('en');
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Hello, Azizbek!');
   });
 });
