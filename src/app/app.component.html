@@ -1,0 +1,43 @@
+<div class="header">
+  <div class="logo">Task i18n</div>
+
+  <nav class="nav">
+    <ul>
+      <li>{{ 'menu.home' | t }}</li>
+      <li>{{ 'menu.about' | t }}</li>
+      <li>{{ 'menu.contact' | t }}</li>
+    </ul>
+  </nav>
+
+  <select [(ngModel)]="selectedLanguage" (change)="changeLanguage(selectedLanguage)">
+    <option *ngFor="let lang of languages" [value]="lang.code">
+      {{ lang.label }}
+    </option>
+  </select>
+</div>
+
+<div class="container">
+  <h1 class="prof-title">{{ 'profile.title' | t }}</h1>
+
+  <h1>{{ 'common.hello' | t:{ name: 'Azizbek' } }}</h1>
+
+  <form>
+    <label>{{ 'form.username.label' | t }}</label>
+    <input type="text" placeholder="{{ 'form.username.placeholder' | t }}">
+
+    <label>{{ 'form.password.label' | t }}</label>
+    <input type="password" placeholder="{{ 'form.password.placeholder' | t }}">
+
+    <button type="submit">{{ 'form.submit' | t }}</button>
+  </form>
+
+  <select class="select-gender" [(ngModel)]="selectedGender" (change)="changeGender(selectedGender)">
+    <option *ngFor="let g of genders" [value]="g.code">
+      {{ g.label | t}}
+    </option>
+  </select>
+
+  <p>{{ 'profile.online' | t:{ gender: (genderKey | t) } }}</p>
+
+  <p>{{ 'items.many' | t:{ count: count } }}</p>
+</div>
