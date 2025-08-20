@@ -28,10 +28,10 @@ const uz:EnTranslations = {
     },
     online: '{gender} onlayn'
   },
-  items: {
-    zero: 'Hech narsa yo‘q',
-    one: '1 ta element',
-    many: '{count} ta element'
-  }
+notifications: {
+    zero: 'Sizda hech qanday bildirishnoma yo‘q',
+    one: 'Sizda {count} ta bildirishnoma bor',
+    many: 'Sizda {count} ta bildirishnoma bor',
+  },
 };
 export default uz;

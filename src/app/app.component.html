@@ -37,7 +37,11 @@
 
   <p>{{ 'profile.online' | t:{ gender: (genderKey | t) } }}</p>
 
-  <p>{{ 'items.many' | t:{ count: count } }}</p>
+<p>{{ 'notifications.zero' | t }}</p>
+<p>{{ 'notifications.one' | t:{ count: 1 } }}</p>
+<p>{{ 'notifications.many' | t:{ count: 5 } }}</p>
+
+
 </div>
 <ng-template #loadingTpl>
   <div class="card-skeleton">

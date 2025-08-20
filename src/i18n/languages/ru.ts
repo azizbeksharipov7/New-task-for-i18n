@@ -29,11 +29,11 @@ const ru: EnTranslations = {
     },
     online: '{gender} в сети'
   },
-  items: {
-    zero: 'Нет элементов',
-    one: '1 элемент',
-    many: '{count} элементов'
-  }
+  notifications: {
+    zero: 'У вас нет уведомлений',
+    one: 'У вас {count} уведомление',
+    many: 'У вас {count} уведомлений',
+  },
 };
 
 export default ru;

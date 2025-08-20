@@ -29,14 +29,29 @@ describe('I18nService', () => {
     expect(result).toBe('Hello, Azizbek!');
   });
 
-it('should return key if missing translation', () => {
-  const result = service.translate('nonexistent.key' as any);
-  expect(result).toBe('nonexistent.key');
-});
+  it('should return key if missing translation', () => {
+    const result = service.translate('nonexistent.key' as any);
+    expect(result).toBe('nonexistent.key');
+  });
 
-  it('should replace parameters correctly', async () => {
-    await (service as any).loadTranslations('en');
-    const result = service.translate('items.many', { count: 5 });
-    expect(result).toBe('5 items');
+  describe('pluralization for notifications', () => {
+    beforeEach(async () => {
+      await (service as any).loadTranslations('en');
+    });
+
+    it('should handle zero notifications', () => {
+      const result = service.translate('notifications.zero', { count: 0 });
+      expect(result).toBe('You have no notifications');
+    });
+
+    it('should handle one notification', () => {
+      const result = service.translate('notifications.one', { count: 1 });
+      expect(result).toBe('You have 1 notification');
+    });
+
+    it('should handle many notifications', () => {
+      const result = service.translate('notifications.many', { count: 5 });
+      expect(result).toBe('You have 5 notifications');
+    });
   });
 });

@@ -27,11 +27,11 @@ const en = {
     },
     online: '{gender} is online'
   },
-  items: {
-    zero: 'No items',
-    one: '1 item',
-    many: '{count} items'
-  }
+notifications: {
+    zero: 'You have no notifications',
+    one: 'You have {count} notification',
+    many: 'You have {count} notifications',
+  },
 };
 
 export default en;
