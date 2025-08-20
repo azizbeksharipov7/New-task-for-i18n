@@ -9,11 +9,9 @@
     </ul>
   </nav>
 
-  <select [(ngModel)]="selectedLanguage" (change)="changeLanguage(selectedLanguage)">
-    <option *ngFor="let lang of languages" [value]="lang.code">
-      {{ lang.label }}
-    </option>
-  </select>
+  <p-select [options]="languages" [(ngModel)]="selectedLanguage" optionLabel="label" optionValue="code"
+    (onChange)="changeLanguage($event.value)" placeholder="Select language">
+  </p-select>
 </div>
 
 <div class="container">

@@ -4,20 +4,27 @@ import { I18nService } from '../i18n/i18n.service';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from "../i18n/translate.pipe";
 import { FormsModule } from '@angular/forms';
+import { Select } from 'primeng/select';
 type Language = 'uz' | 'ru' | 'en';
 type Gender = 'male' | 'female';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, TranslatePipe, FormsModule],
+  imports: [CommonModule, TranslatePipe, FormsModule, Select],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  selectedLanguage: Language = 'en';  // ✅ type aniq belgilandi
-  selectedGender: Gender = 'male';    // ✅ gender ham aniq type bilan
-
+  count = 5;
+  title = 'i18n';
+  selectedLanguage: Language = 'en';
+  selectedGender: Gender = 'male'; 
+  
+  constructor(public i18n: I18nService) {
+    this.selectedLanguage = this.i18n['locale$'].value;
+  }
+  
   languages: { code: Language; label: string, logo: string }[] = [
     { code: 'en', label: 'English', logo: 'united-states.png' },
     { code: 'ru', label: 'Русский', logo: 'russia.png' },
@@ -29,11 +36,8 @@ export class AppComponent {
     { code: 'female', label: 'profile.gender.female' },
   ];
 
-
-  count = 5;
-  title = 'i18n';
   changeLanguage(lang: Language) {
-    this.selectedLanguage = lang;  // ✅ endi xatolik bo‘lmaydi
+    this.selectedLanguage = lang;
     this.i18n.switchLanguage(lang);
   }
   changeGender(g: Gender) {
@@ -41,10 +45,6 @@ export class AppComponent {
   }
   get genderKey(): "profile.gender.male" | "profile.gender.female" {
     return `profile.gender.${this.selectedGender}` as const;
-  }
-
-  constructor(public i18n: I18nService) {
-    this.selectedLanguage = this.i18n['locale$'].value;
   }
 
   switch(lang: 'en' | 'ru' | 'uz') {
