@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Pipe, PipeTransform } from '@angular/core';
-import { I18nService } from './i18n.service';
+import { I18nService } from './services/i18n.service';
 import { TranslationKey } from './types';
 
 @Pipe({ name: 't', standalone: true, pure: false })

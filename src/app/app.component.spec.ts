@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { I18nService } from '../i18n/i18n.service';
+import { I18nService } from '../i18n/services/i18n.service';
 import { TranslatePipe } from '../i18n/translate.pipe';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -29,9 +29,14 @@ describe('AppComponent', () => {
 
   it('should render profile title translation', async () => {
     await (i18n as any).loadTranslations('en');
+
+    component.loading = false;
     fixture.detectChanges();
+
+    await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.prof-title')?.textContent).toContain('User Profile');
+    const title = compiled.querySelector('.prof-title')?.textContent?.trim();
+    expect(title).toContain('User Profile');
   });
 
   it('should change language when changeLanguage is called', () => {
@@ -47,7 +52,11 @@ describe('AppComponent', () => {
 
   it('should render hello with param', async () => {
     await (i18n as any).loadTranslations('en');
+
+    component.loading = false;
     fixture.detectChanges();
+
+    await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Hello, Azizbek!');
   });

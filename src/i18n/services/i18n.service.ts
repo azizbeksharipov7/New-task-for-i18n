@@ -1,13 +1,13 @@
-import { Injectable, inject, isDevMode } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
-import { TranslationKey, BaseTranslations } from './types';
+import { TranslationKey, BaseTranslations } from '../types';
 
 type Locale = 'en' | 'ru' | 'uz';
 
 @Injectable({ providedIn: 'root' })
 export class I18nService {
-  private locale$ = new BehaviorSubject<Locale>(this.detectLocale());
-  private translations$ = new BehaviorSubject<BaseTranslations | null>(null);
+  public locale$ = new BehaviorSubject<Locale>(this.detectLocale());
+  public translations$ = new BehaviorSubject<BaseTranslations | null>(null);
 
   constructor() {
     this.loadTranslations(this.locale$.value);
@@ -29,9 +29,9 @@ export class I18nService {
   private async loadTranslations(locale: Locale) {
     let module;
     switch (locale) {
-      case 'ru': module = await import('./ru'); break;
-      case 'uz': module = await import('./uz'); break;
-      default:   module = await import('./en'); break;
+      case 'ru': module = await import('../languages/ru'); break;
+      case 'uz': module = await import('../languages/uz'); break;
+      default:   module = await import('../languages/en'); break;
     }
     this.translations$.next(module.default);
   }

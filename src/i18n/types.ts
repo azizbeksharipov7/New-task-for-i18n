@@ -1,4 +1,4 @@
-import en from './en';
+import en from './languages/en';
 export type BaseTranslations = typeof en;
 
 export type DotPaths<T, Prev extends string = ''> = {

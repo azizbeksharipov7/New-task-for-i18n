@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { I18nService } from '../i18n/i18n.service';
+import { Component } from '@angular/core';
+import { I18nService } from '../i18n/services/i18n.service';
 import { CommonModule } from '@angular/common';
 import { TranslatePipe } from "../i18n/translate.pipe";
 import { FormsModule } from '@angular/forms';
@@ -19,16 +18,25 @@ export class AppComponent {
   count = 5;
   title = 'i18n';
   selectedLanguage: Language = 'en';
-  selectedGender: Gender = 'male'; 
-  
+  selectedGender: Gender = 'male';
+  loading = true;
+
+  ngOnInit() {
+    this.i18n.translations$.subscribe(trans => {
+      if (trans) {
+        setTimeout(() => this.loading = false, 800);
+      }
+    });
+  }
+
   constructor(public i18n: I18nService) {
     this.selectedLanguage = this.i18n['locale$'].value;
   }
-  
-  languages: { code: Language; label: string, logo: string }[] = [
-    { code: 'en', label: 'English', logo: 'united-states.png' },
-    { code: 'ru', label: 'Русский', logo: 'russia.png' },
-    { code: 'uz', label: 'O‘zbekcha', logo: 'flag.png' },
+
+  languages: { code: Language; label: string }[] = [
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'uz', label: 'O‘zbekcha' },
   ];
 
   genders: { code: Gender; label: "profile.gender.male" | "profile.gender.female" }[] = [

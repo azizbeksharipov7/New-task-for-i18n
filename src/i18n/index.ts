@@ -1,6 +1,6 @@
-import en, { EnTranslations } from './en';
-import ru from './ru';
-import uz from './uz';
+import en, { EnTranslations } from './languages/en';
+import ru from './languages/ru';
+import uz from './languages/uz';
 
 export type Locale = 'en' | 'ru' | 'uz';
 export type Translations = EnTranslations;
