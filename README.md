@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.7 and uses i18n (internationalization) without a library.
 
+## 🎥 Demo
+
+![i18n Demo](./public/demo-i18n.gif)
+
+## ✨ Features
+
+- 🌐 Multi-language support (Uzbek, Russian, English)
+- ⚡ Lazy-loaded translations (code-splitting)
+- 💾 Locale persistence via localStorage
+- 🔔 Notifications with pluralization support
+- 🖼 Splash screen while loading translations
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
